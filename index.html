@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUET Civil Engineering Section B | Digital Batch Directory</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <!-- Particle JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Light Theme Glassmorphism & Transparency Effects */
+        .glass-bg {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .glass-search {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Text styles for light theme */
+        .text-dark-high {
+            color: #1e293b;
+        }
+        
+        .text-dark-medium {
+            color: #334155;
+        }
+        
+        .text-dark-low {
+            color: #475569;
+        }
+        
+        .text-gradient-light {
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777, #2563eb);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 8s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .gold-border-light {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, rgba(255,255,255,0.25), rgba(255,255,255,0.25)) padding-box,
+                        linear-gradient(45deg, #FFD700, #B8860B, #FFD700) border-box;
+            border-radius: 1rem;
+        }
+        
+        .developer-glow-light {
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+        
+        .particles-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+        
+        /* Light overlay for welcome page */
+        .welcome-overlay-light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(219, 234, 254, 0.4));
+            z-index: -1;
+        }
+        
+        .shutter-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            transform-origin: top;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Flip Card Styles with light theme transparency */
+        .flip-card-container {
+            perspective: 1000px;
+            width: 95%;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+        
+        .flip-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flip-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        }
+        
+        .flip-card-front {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .flip-card-back {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transform: rotateY(180deg);
+        }
+        
+        /* Fixed: Photo takes exactly 65% of card height */
+        .card-image-container {
+            height: 65%;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .student-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .flip-card:hover .student-image {
+            transform: scale(1.05);
+        }
+        
+        /* Fixed: Roll badge removed from photo - will show below */
+        .photo-roll-badge {
+            display: none;
+        }
+        
+        /* Fixed: Content below photo - name and roll */
+        .card-content-front {
+            height: 50%;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .student-name-front {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        
+        .student-roll-front {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2563eb;
+            background: rgba(37, 99, 235, 0.1);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            align-self: flex-start;
+        }
+        
+        /* Back card styles */
+        .back-image-container {
+            width: 100%;
+            height: 140px;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            margin-bottom: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .back-student-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .back-roll-badge {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            color: #1e293b;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+        
+        .back-student-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+        
+        .info-icon {
+            width: 20px;
+            color: #2563eb;
+            margin-right: 8px;
+        }
+        
+        .info-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .social-icon-light {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .social-icon-light:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .fb-icon { color: #1877f2; }
+        .wa-icon { color: #25D366; }
+        .insta-icon { color: #e4405f; }
+        
+        /* Dashboard background with light gradient */
+        #dashboard {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #ffffff);
+            min-height: 100vh;
+        }
+        
+        /* Welcome page background */
+        #welcome-page {
+            background: linear-gradient(135deg, #dbeafe, #ede9fe, #fce7f3);
+        }
+        
+        /* Executive card text for light theme */
+        .exec-card-title-light {
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .exec-card-subtitle-light {
+            color: #334155;
+            font-weight: 500;
+        }
+        
+        .exec-card-text-light {
+            color: #475569;
+            font-weight: 400;
+        }
+        
+        /* Tag styles with light theme transparency */
+        .tag-light {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.3);
+            color: #1e293b;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Button styles with light theme transparency */
+        .btn-primary-light {
+            background: rgba(37, 99, 235, 0.15);
+            color: #1e40af;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-light:hover {
+            background: rgba(37, 99, 235, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-secondary-light {
+            background: rgba(245, 158, 11, 0.15);
+            color: #b45309;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary-light:hover {
+            background: rgba(245, 158, 11, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        
+        /* Floating icons with light theme transparency */
+        .floating-icon-light {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+        }
+        
+        /* Total students counter for light theme */
+        .total-students-badge-light {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 10px 20px;
+            border-radius: 12px;
+            color: #1e293b;
+        }
+        
+        /* Input field for light theme */
+        .input-light {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #1e293b;
+        }
+        
+        .input-light::placeholder {
+            color: #64748b;
+        }
+        
+        .input-light:focus {
+            outline: none;
+            ring: 2px solid rgba(37, 99, 235, 0.3);
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Welcome Page - Light Theme -->
+    <section id="welcome-page" class="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden">
+        <!-- Particle Background -->
+        <div id="particles-js" class="particles-bg"></div>
+        <div class="welcome-overlay-light"></div>
+        
+        <!-- Main Content with Light Theme Transparency -->
+        <div class="text-center z-10 px-4 py-12 glass-bg rounded-3xl max-w-4xl mx-4" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-4 text-gradient-light">
+                RUET
+            </h1>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 text-dark-high">
+                CIVIL ENGINEERING
+            </h2>
+            <h3 class="text-2xl md:text-4xl font-semibold mb-8 text-dark-medium">
+                SECTION B
+            </h3>
+            <p class="text-xl text-dark-low max-w-2xl mb-12">
+                The Digital Batch Directory • Connecting 60 Future Civil Engineers
+            </p>
+            
+            <button id="explore-btn" class="px-10 py-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 text-dark-high text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm border border-white/40">
+                <i class="fas fa-compass mr-2"></i> Explore Students
+            </button>
+        </div>
+        
+        <!-- Floating Icons with Light Theme Transparency -->
+        <div class="absolute top-20 left-10 text-4xl text-blue-600/60 animate-bounce floating-icon-light p-4 rounded-full">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="absolute top-40 right-16 text-5xl text-purple-600/60 animate-pulse floating-icon-light p-4 rounded-full">
+            <i class="fas fa-drafting-compass"></i>
+        </div>
+        <div class="absolute bottom-32 left-20 text-6xl text-rose-600/50 animate-bounce floating-icon-light p-4 rounded-full" style="animation-delay: 0.5s;">
+            <i class="fas fa-industry"></i>
+        </div>
+        <div class="absolute bottom-40 right-24 text-3xl text-emerald-600/60 animate-pulse floating-icon-light p-4 rounded-full" style="animation-delay: 1s;">
+            <i class="fas fa-ruler-combined"></i>
+        </div>
+    </section>
+    
+    <!-- Shutter Transition Element -->
+    <div id="shutter-transition" class="shutter-transition" style="display: none;">
+        <div class="shutter-logo text-6xl font-bold text-gradient-light">RUET CIVIL B</div>
+    </div>
+    
+    <!-- Dashboard - Light Theme -->
+    <section id="dashboard" class="min-h-screen w-full py-8" style="display: none;">
+        <!-- Sticky Header with Light Theme Transparency -->
+        <header class="glass-header sticky top-0 z-50 py-4 px-6 mb-8">
+            <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
+                    <img src="https://i.ibb.co.com/yc1ntSw5/485737605-640557798587146-3561083034474490353-n.jpg" alt="485737605-640557798587146-3561083034474490353-n" border="0"></a>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-dark-high">Rajshahi University of Engineering & Technology</h1>
+                        <p class="text-dark-medium">Civil Engineering - Section B | Batch Directory</p>
+                    </div>
+                </div>
+                
+                <!-- Total Students Counter -->
+                <div class="total-students-badge-light">
+                    <p class="text-sm text-dark-medium">Total Students</p>
+                    <p class="text-2xl font-bold text-dark-high">60</p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="container mx-auto px-4">
+            <!-- Executive Row with Light Theme Transparency -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-dark-high mb-6 text-center">Executive Committee</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Class Representative 1 -->
+                    <div class="developer-glow-light rounded-2xl p-6 glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
+                                <i class="fas fa-code text-blue-700 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="exec-card-title-light">Fahad Sarker Tuhin</h3>
+                                <p class="exec-card-subtitle-light">Class Representative</p>
+                            </div>
+                        </div>
+                        <p class="exec-card-text-light mb-4">Serious Guy.</p>
+                        </div>
+
+                    
+                    <!-- Class Representative 2 -->
+                    <div class="developer-glow-light rounded-2xl p-6 glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
+                                <i class="fas fa-code text-blue-700 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="exec-card-title-light">Tanmoy Karmokar Tani</h3>
+                                <p class="exec-card-subtitle-light">Class Representative</p>
+                            </div>
+                        </div>
+                        <p class="exec-card-text-light mb-4">Tuition lord.</p>
+                        </div>
+
+                    
+                    <!-- Developer Section -->
+                    <div class="developer-glow-light rounded-2xl p-6 glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
+                                <i class="fas fa-code text-blue-700 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="exec-card-title-light">Ferdous Ahmed Pranto</h3>
+                                <p class="exec-card-subtitle-light">Digital Directory Developer</p>
+                            </div>
+                        </div>
+                        <p class="exec-card-text-light mb-4">Chill Guy.</p>
+                        <div class="flex space-x-3">
+                            <span class="tag-light">Frontend</span>
+                            <span class="tag-light">UI/UX</span>
+                            <span class="tag-light">GSAP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search and Filter with Light Theme Transparency -->
+            <div class="glass-search rounded-xl p-6 mb-10 shadow-lg">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="w-full md:w-2/3 mb-6 md:mb-0">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-dark-low"></i>
+                            </div>
+                            <input type="text" id="search-input" class="w-full pl-10 pr-4 py-3 rounded-lg bg-white/30 backdrop-blur-sm border border-white/50 text-dark-high placeholder-dark-low focus:outline-none focus:ring-2 focus:ring-blue-500/30" placeholder="Search students by name, roll number, location...">
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button id="filter-all" class="btn-primary-light">
+                            All Students
+                        </button>
+                        <button id="filter-cr" class="btn-secondary-light">
+                            Class Representatives
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-dark-medium font-medium">Quick filters:</span>
+                    <button class="filter-tag px-3 py-1 bg-white/30 hover:bg-white/40 text-dark-medium rounded-full text-sm backdrop-blur-sm transition-colors border border-white/40">
+                        <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i> By Location
+                    </button>
+                    <button class="filter-tag px-3 py-1 bg-white/30 hover:bg-white/40 text-dark-medium rounded-full text-sm backdrop-blur-sm transition-colors border border-white/40">
+                        <i class="fas fa-school mr-1 text-green-600"></i> By School
+                    </button>
+                    <button class="filter-tag px-3 py-1 bg-white/30 hover:bg-white/40 text-dark-medium rounded-full text-sm backdrop-blur-sm transition-colors border border-white/40">
+                        <i class="fas fa-university mr-1 text-purple-600"></i> By College
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Student Cards Grid -->
+            <div id="student-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Student cards will be generated dynamically by JavaScript -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="no-results" class="text-center py-16 glass-card rounded-2xl hidden">
+                <i class="fas fa-user-slash text-5xl text-dark-low mb-4"></i>
+                <h3 class="text-2xl font-bold text-dark-high mb-2">No Students Found</h3>
+                <p class="text-dark-medium">Try adjusting your search or filter to find what you're looking for.</p>
+            </div>
+        </div>
+        
+        <!-- Footer with Light Theme Transparency -->
+        <footer class="mt-16 py-8 glass-header">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-2xl font-bold text-dark-high mb-4">RUET Civil Engineering - Section B</h3>
+                <p class="text-dark-medium mb-6">Digital Batch Directory • Connecting Future Civil Engineers</p>
+                <div class="flex justify-center space-x-6 text-2xl mb-6">
+                    <a href="#" class="social-icon-light fb-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon-light wa-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="social-icon-light insta-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <p class="text-dark-low text-sm">&copy; 2024 Rajshahi University of Engineering & Technology. All rights reserved.</p>
+            </div>
+        </footer>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // Student Data Array - EDIT THIS SECTION TO ADD/UPDATE STUDENT INFORMATION
+        const studentData = [
+            {
+                roll: "240061",
+                name: "Md.Nasib Hasan Abir",
+                loc: "Dinajpur",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/md.nasib.hasan.abir",
+                wa: "https://wa.me/8801753777448",
+                insta: "https://www.instagram.com/md.nasib_hasan_abir/",
+                img: "",
+                isCR: false
+            },
+            {
+                roll: "2400062",
+                name: "Md.Al-Amin Rahat",
+                loc: "Barishal",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/alamin.rahat.5895",
+                wa: "https://wa.me/8801337986603",
+                insta: "https://instagram.com",
+                img: "",
+                isCR: false
+            },
+            {
+                roll: "2400063",
+                name: "Md.Komol Hossen",
+                loc: "Bogura",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/16HnBnq6p8/",
+                wa: "https://wa.me/8801763398508",
+                insta: "https://instagram.com",
+                img: "",
+                isCR: false
+            },
+            {
+                roll: "2400064",
+                name: "Nooha Zaman",
+                loc: "Rajshahi",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/16hWukizd4/",
+                wa: "https://wa.me/8801302576797",
+                insta: "https://instagram.com",
+                img: "",
+                isCR: true
+            },
+            {
+                roll: "2400065",
+                name: "Ferdous Ahmed Pranto",
+                loc: "Jhenaidah",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://facebook.com",
+                wa: "https://wa.me/8801893594664",
+                insta: "https://instagram.com",
+                img: "",
+                isCR: false
+            },
+            {
+                roll: "2400066",
+                name: "Mobin Bhuyan Drovo",
+                loc: "Mymensingh",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/mobinbhuyan.drovo.3",
+                wa: "https://wa.me/8801943118653",
+                insta: "https://instagram.com",
+                img: "",
+                isCR: false
+            },
+            {
+                roll: "2400067",
+                name: "Istiak Sarker",
+                loc: "Unknown",
+                school: "Unknown",
+                college: "Unknown",
+                fb: "https://facebook.com",
+                wa: "https://wa.me/8801XXXXXXXXX",
+                insta: "https://instagram.com",
+                img: "",
+                isCR: false
+            },
+            {
+                roll: "2400068",
+                name: "Umme Habiba Sultana",
+                loc: "Naogaon",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/16MELLd78c/",
+                wa: "https://wa.me/8801730906768",
+                insta: "https://instagram.com",
+                img: "",
+                isCR: false
+            },
+            {
+                roll: "2400069",
+                name: "Mahmudul Hasan Fahim",
+                loc: "Munshigonj",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/16nz69hcNY/",
+                wa: "https://wa.me/8801785421423",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400070",
+                name: "Md.Ashraful Islam",
+                loc: "Jamalpur",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/1a6fTwnTs2/",
+                wa: "https://wa.me/8801617418869",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400071",
+                name: "Md.Maruf Hossan",
+                loc: "Dhaka",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1BEuUoBp66/",
+                wa: "https://wa.me/8801851399957",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400072",
+                name: "Fahad Sarker Tuhin",
+                loc: "Sirajganj",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/1NLkwBiZxJ/",
+                wa: "https://wa.me/8801831988255",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: true
+            },
+            {
+                roll: "2400073",
+                name: "Tushar Roy",
+                loc: "Dinajpur",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1Fz9M5A9i1/",
+                wa: "https://wa.me/8801794688680",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400074",
+                name: "Most.Lamyea Akter Liza",
+                loc: "Gaibandha",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1A2xUgVCEZ/",
+                wa: "https://wa.me/8801522120216",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400075",
+                name: "Tabassum Rahman Mohona",
+                loc: "Dinajpur",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/16e2WC1LNw/",
+                wa: "https://wa.me/8801838861063",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400076",
+                name: "Md.Ahnaf Tahmid Jawad",
+                loc: "Bogura",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/ahnaf.tahmid.jawad",
+                wa: "https://wa.me/8801775731311",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400077",
+                name: "Araf Rahman Omi",
+                loc: "Jashore",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/12Li6h6fMpP/",
+                wa: "https://wa.me/8801975308399",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400078",
+                name: "Mubtasim Fuad Somoy",
+                loc: "Mymensingh",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1AZWom8Nxz/",
+                wa: "https://wa.me/8801748472325",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400079",
+                name: "Nasif Bin Habib",
+                loc: "Dhaka",
+                school: "xxxx",
+                college: "Dhaka College,Dhaka",
+                fb: "https://www.facebook.com/share/1ApLNb7My7/",
+                wa: "https://wa.me/8801603561910",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400080",
+                name: "Md.Arman Mahir",
+                loc: "Noakhali",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1ETmssScNc/",
+                wa: "https://wa.me/8801615699200",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400081",
+                name: "Md.Hasin Anzum",
+                loc: "Rajshahi",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/1AhgR3NrQT/",
+                wa: "https://wa.me/8801770803020",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400082",
+                name: "Rubaiat Sharmin",
+                loc: "Thakurgaon",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/19HAa89qea/",
+                wa: "https://wa.me/8801324075645",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400083",
+                name: "Nafis Kabir Ayon",
+                loc: "Jamalpur",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/nafiskabir.ayon",
+                wa: "https://wa.me/8801602336496",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400084",
+                name: "Sumaiya Akon",
+                loc: "Barishal",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/19DPsmWcpB/?mibextid=wwXIfr",
+                wa: "https://wa.me/8801898942314",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400085",
+                name: "Md.Abdur Rakib Khan",
+                loc: "Kushtia",
+                school: "xxxx",
+                college: "Dhaka College,Dhaka",
+                fb: "https://www.facebook.com/share/19CiFzKucH/",
+                wa: "https://wa.me/8801822530565",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400086",
+                name: "Sefaoul haq",
+                loc: "Narsingdi",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1FJm1QZcie/",
+                wa: "https://wa.me/8801792455657",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400087",
+                name: "Musab Al Reseud",
+                loc: "Bogura",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/1DcGbarsTv/",
+                wa: "https://wa.me/8801315820337",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400088",
+                name: "Md.Rezowanul Shek Mahi",
+                loc: "Unknown",
+                school: "Unknown",
+                college: "Unknown",
+                fb: "https://facebook.com",
+                wa: "https://wa.me/8801XXXXXXXXX",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400089",
+                name: "Abdullah Al Jubayear",
+                loc: "Noakhali",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/AA.JUBAYEAR?mibextid=ZbWKwL",
+                wa: "https://wa.me/8801602808698",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400090",
+                name: "Saad Ibna Faruk",
+                loc: "Thakurgaon",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://facebook.com",
+                wa: "https://wa.me/8801580139995",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400091",
+                name: "Md.Shajjad Hossain Shohag",
+                loc: "Rangpur",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/16T9YZ3YiV/",
+                wa: "https://wa.me/8801926504533",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400092",
+                name: "Abdullah Al Noman",
+                loc: "Chandpur",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1KwotjDVhv/",
+                wa: "https://wa.me/8801788760463",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400093",
+                name: "Tanmoy Karmokar Tani",
+                loc: "Dinajpur",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/1BBs5WfirJ/",
+                wa: "https://wa.me/8801745053467",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: true
+            },
+            {
+                roll: "2400094",
+                name: "Md.Sabbir Ahammed",
+                loc: "Thakurgaon",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/md.sabbir.ahammed.969598",
+                wa: "https://wa.me/8801869944211",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400095",
+                name: "Md.Mubtashim Fuad",
+                loc: "Thakurgaon",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/1Yqo8df1QJ/",
+                wa: "https://wa.me/8801707477890",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400096",
+                name: "Nusrat Jahan Tuly",
+                loc: "Bogura",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/196FRAx5kX/",
+                wa: "https://wa.me/8801612545564",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400097",
+                name: "Anisha Binta Alam",
+                loc: "Rajshahi",
+                school: "xxxx",
+                college: "xxx",
+                fb: "https://www.facebook.com/anisha.binta.alam.2025",
+                wa: "https://wa.me/8801714943626",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400098",
+                name: "Md.Mahib Hasan",
+                loc: "Bogura",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1CCqGRmg3J/",
+                wa: "https://wa.me/8801993101301",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400099",
+                name: "Wasiq Ahmad",
+                loc: "Kushtia",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1DwYpSiwn9/?mibextid=qi2Omg",
+                wa: "https://wa.me/8801826821987",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400100",
+                name: "Md.Tanvir Haider Aronno",
+                loc: "Rajshahi",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/tanvirhaider.aronno",
+                wa: "https://wa.me/8801728639570",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400101",
+                name: "Tanzim Ahsan Mafi",
+                loc: "Tangail",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://facebook.com",
+                wa: "https://wa.me/8801522140954",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400102",
+                name: "Md.Tazim Parvez Likhon",
+                loc: "Kushtia",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/tajimparvej.tajim",
+                wa: "https://wa.me/8801707146314",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400103",
+                name: "Saadat Aanon Khan",
+                loc: "Dhaka",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/19D5LMx5wV/",
+                wa: "https://wa.me/8801405206725",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400104",
+                name: "Md.Mahid Hasan Jitu",
+                loc: "Cumilla",
+                school: "xxxx",
+                college: "Notre Dame College,Dhaka",
+                fb: "https://www.facebook.com/share/12LPeMVqB8S/",
+                wa: "https://wa.me/8801941444220",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400105",
+                name: "Fuad Hasan Soikat",
+                loc: "Khulna",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1M7f8ZGryJ/",
+                wa: "https://wa.me/8801923817007",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400106",
+                name: "Samir Kumar sarker",
+                loc: "Gaibandha",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/samir.samir.sarker.2024",
+                wa: "https://wa.me/8801964972508",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400107",
+                name: "Md. Meherab Hossain",
+                loc: "Jhenaidah",
+                school: "Jhenaidah Govt.High School,Jhenaidah",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1AqePL42md/",
+                wa: "https://wa.me/8801919943577",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400108",
+                name: "Shubhayon Kumar Modak",
+                loc: "Bogura",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1BZrr19ajA/",
+                wa: "https://wa.me/8801572906119",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400109",
+                name: "S.M.Sakhoat Mahmud",
+                loc: "Rajshahi",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1AJfi2xYtt/",
+                wa: "https://wa.me/8801739009086",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400110",
+                name: "Md.Nokibur Rahman",
+                loc: "Pabna",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1a4V6AMKMV/",
+                wa: "https://wa.me/8801962175408",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400111",
+                name: "Nafis Fuad",
+                loc: "Rajshahi",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1BBm3f2UUU/",
+                wa: "https://wa.me/8801615405145",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400112",
+                name: "Noor Sadman Sakib",
+                loc: "Rajshahi",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1ES8NZW3QR/",
+                wa: "https://wa.me/8801890419720",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400113",
+                name: "Bishal Sarker Tirtho",
+                loc: "Dhaka",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/14oSJnZhsY/",
+                wa: "https://wa.me/8801806004110",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400114",
+                name: "Aysha Binta Ali",
+                loc: "Rajbari",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/ayeshaa.binta.ali",
+                wa: "https://wa.me/8801888572724",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400115",
+                name: "Syed Waffi Hasan Emon",
+                loc: "Sherpur",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/18sRgX9vSV/?mibextid=qi2Omg",
+                wa: "https://wa.me/8801995408968",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400116",
+                name: "Umme Sayma",
+                loc: "Dhaka",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1GzybpNTSe/",
+                wa: "https://wa.me/8801601310004",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400117",
+                name: "Md.Rifat Hasan salman",
+                loc: "Faridpur",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/rifat.hasan.salman.2025?mibextid=ZbWKwL",
+                wa: "https://wa.me/8801972690058",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+            {
+                roll: "2400118",
+                name: "Md.Shahriar Hossain Sohan",
+                loc: "Sirajganj",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/17XkpX954z/",
+                wa: "https://wa.me/8801568520075",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+           {
+                roll: "2400119",
+                name: "Sk.Ifaz Ahmed",
+                loc: "Khulna",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/share/1L7HT1cvW2/",
+                wa: "https://wa.me/8801797191401",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            },
+           {
+                roll: "2400120",
+                name: "Amir Uddin Mahmud",
+                loc: "Chittagong",
+                school: "xxxx",
+                college: "xxxx",
+                fb: "https://www.facebook.com/alve00?mibextid=ZbWKwL",
+                wa: "https://wa.me/8801619013412",
+                insta: "https://instagram.com",
+                img: "xxxx",
+                isCR: false
+            }
+
+
+
+
+
+        ];
+        
+        // Track currently flipped card
+        let currentlyFlippedCard = null;
+        
+        // Function to generate student cards with flip functionality
+        function generateStudentCards(students) {
+            const grid = document.getElementById('student-grid');
+            grid.innerHTML = '';
+            currentlyFlippedCard = null; // Reset flipped card state
+            
+            if (students.length === 0) {
+                document.getElementById('no-results').classList.remove('hidden');
+                return;
+            }
+            
+            document.getElementById('no-results').classList.add('hidden');
+            
+            students.forEach((student, index) => {
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'flip-card-container';
+                cardContainer.setAttribute('data-aos', 'fade-up');
+                cardContainer.setAttribute('data-aos-delay', (index % 10) * 50);
+                
+                const cardId = `card-${index}-${student.roll}`;
+                
+                cardContainer.innerHTML = `
+                    <div id="${cardId}" class="flip-card ${student.isCR ? 'gold-border-light' : ''}">
+                        <!-- Front of Card - Photo top 50%, Name and Roll below -->
+                        <div class="flip-card-front">
+                            <div class="card-image-container">
+                                <img src="${student.img}" alt="${student.name}" class="student-image">
+                                ${student.isCR ? '<div class="absolute top-2 left-2 bg-amber-400/40 text-amber-700 px-2 py-1 rounded-full text-xs font-bold border border-amber-400/50 backdrop-blur-sm z-10">CR</div>' : ''}
+                            </div>
+                            <div class="card-content-front">
+                                <h3 class="student-name-front">${student.name}</h3>
+                                <span class="student-roll-front">Roll: ${student.roll}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Back of Card - Shows all details -->
+                        <div class="flip-card-back p-4 overflow-y-auto">
+                            <div class="relative">
+                                <div class="back-image-container">
+                                    <img src="${student.img}" alt="${student.name}" class="back-student-image">
+                                </div>
+                                <div class="absolute top-2 right-2 back-roll-badge">Roll: ${student.roll}</div>
+                                ${student.isCR ? '<div class="absolute top-2 left-2 bg-amber-400/40 text-amber-700 px-2 py-1 rounded-full text-xs font-bold border border-amber-400/50 backdrop-blur-sm">CR</div>' : ''}
+                            </div>
+                            
+                            <h3 class="back-student-name">${student.name}</h3>
+                            
+                            <div class="space-y-2">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt info-icon"></i>
+                                    <span class="info-text">${student.loc}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <i class="fas fa-school info-icon"></i>
+                                    <span class="info-text">${student.school}</span>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <i class="fas fa-university info-icon"></i>
+                                    <span class="info-text">${student.college}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-center space-x-3 mt-4 pt-3 border-t border-white/40">
+                                <a href="${student.fb}" target="_blank" class="social-icon-light fb-icon" onclick="event.stopPropagation()">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="${student.wa}" target="_blank" class="social-icon-light wa-icon" onclick="event.stopPropagation()">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="${student.insta}" target="_blank" class="social-icon-light insta-icon" onclick="event.stopPropagation()">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(cardContainer);
+                
+                // Add click event to the card
+                const card = document.getElementById(cardId);
+                card.addEventListener('click', function(e) {
+                    // Don't flip if clicking on social links
+                    if (e.target.closest('a')) return;
+                    
+                    // If there's a currently flipped card and it's not this one, flip it back
+                    if (currentlyFlippedCard && currentlyFlippedCard !== this) {
+                        currentlyFlippedCard.classList.remove('flipped');
+                    }
+                    
+                    // Toggle current card
+                    this.classList.toggle('flipped');
+                    
+                    // Update currently flipped card
+                    if (this.classList.contains('flipped')) {
+                        currentlyFlippedCard = this;
+                    } else {
+                        currentlyFlippedCard = null;
+                    }
+                });
+            });
+        }
+        
+        // Initialize particles background
+        function initParticles() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 60, density: { enable: true, value_area: 800 } },
+                    color: { value: "#3b82f6" },
+                    shape: { type: ["circle", "triangle"], polygon: { nb_sides: 6 } },
+                    opacity: { value: 0.3, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.15, width: 1 },
+                    move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
+        }
+        
+        // Function to filter students
+        function filterStudents() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            
+            let filtered = studentData;
+            
+            // Apply search filter
+            if (searchTerm) {
+                filtered = filtered.filter(student => 
+                    student.name.toLowerCase().includes(searchTerm) ||
+                    student.roll.includes(searchTerm) ||
+                    student.loc.toLowerCase().includes(searchTerm) ||
+                    student.school.toLowerCase().includes(searchTerm) ||
+                    student.college.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            generateStudentCards(filtered);
+        }
+        
+        // GSAP transition from welcome to dashboard
+        function transitionToDashboard() {
+            const shutter = document.getElementById('shutter-transition');
+            const welcomePage = document.getElementById('welcome-page');
+            const dashboard = document.getElementById('dashboard');
+            
+            // Show the shutter
+            shutter.style.display = 'flex';
+            
+            // Create the animation timeline
+            const tl = gsap.timeline();
+            
+            tl.fromTo('.shutter-logo', 
+                { opacity: 0, scale: 0.5 },
+                { opacity: 1, scale: 1.2, duration: 0.8, ease: "power2.out" }
+            )
+            .to('.shutter-logo', {
+                opacity: 0,
+                scale: 1.5,
+                duration: 0.5,
+                ease: "power2.in"
+            })
+            .to(shutter, {
+                scaleY: 0,
+                duration: 0.8,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    // Hide welcome page and show dashboard
+                    welcomePage.style.display = 'none';
+                    dashboard.style.display = 'block';
+                    shutter.style.display = 'none';
+                    
+                    // Reset shutter for next use
+                    gsap.set(shutter, { scaleY: 1 });
+                    
+                    // Initialize student cards
+                    generateStudentCards(studentData);
+                    
+                    // Refresh AOS animations
+                    setTimeout(() => AOS.refresh(), 100);
+                }
+            });
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles
+            initParticles();
+            
+            // Explore button click event
+            document.getElementById('explore-btn').addEventListener('click', transitionToDashboard);
+            
+            // Search input event
+            document.getElementById('search-input').addEventListener('input', filterStudents);
+            
+            // Filter buttons
+            document.getElementById('filter-all').addEventListener('click', function() {
+                document.getElementById('filter-cr').classList.remove('active');
+                this.classList.add('active');
+                document.getElementById('search-input').value = '';
+                generateStudentCards(studentData);
+            });
+            
+            document.getElementById('filter-cr').addEventListener('click', function() {
+                document.getElementById('filter-all').classList.remove('active');
+                this.classList.add('active');
+                document.getElementById('search-input').value = '';
+                
+                const crStudents = studentData.filter(student => student.isCR);
+                generateStudentCards(crStudents);
+            });
+            
+            // Quick filter tags
+            document.querySelectorAll('.filter-tag').forEach(button => {
+                button.addEventListener('click', function() {
+                    const filterText = this.textContent.trim().toLowerCase();
+                    let searchValue = '';
+                    
+                    if (filterText.includes('location')) {
+                        searchValue = 'raj';
+                    } else if (filterText.includes('school')) {
+                        searchValue = 'school';
+                    } else if (filterText.includes('college')) {
+                        searchValue = 'college';
+                    }
+                    
+                    document.getElementById('search-input').value = searchValue;
+                    filterStudents();
+                });
+            });
+            
+            // Mark "All Students" as active by default
+            document.getElementById('filter-all').classList.add('active');
+        });
+    </script>
+</body>
+</html>
