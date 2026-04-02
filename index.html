@@ -6,13 +6,9 @@
     <title>RUET Civil Engineering Section B | Digital Batch Directory</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <style>
@@ -426,6 +422,149 @@
             outline: none;
             ring: 2px solid rgba(37, 99, 235, 0.3);
         }
+
+        /* Memory Gallery Slideshow Styles */
+        .memory-slideshow {
+            position: relative;
+            width: 100%;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .memory-slide {
+            display: none;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+        .memory-slide.active {
+            display: block;
+        }
+        .slideshow-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .memory-slideshow:hover .slideshow-overlay {
+            transform: translateY(0);
+        }
+        .slideshow-caption {
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .slideshow-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .memory-slideshow:hover .slideshow-nav {
+            opacity: 1;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(8px);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e293b;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: all 0.2s;
+        }
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.6);
+            transform: scale(1.1);
+        }
+        .slideshow-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 12px;
+        }
+        
+        .avatar-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            object-fit: cover;
+            transition: transform 0.2s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+        
+        .avatar-more {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1e293b;
+            backdrop-filter: blur(4px);
+        }
+        
+        .stat-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 9999px;
+            color: #1e293b;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-badge:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="relative">
@@ -482,7 +621,7 @@
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center mb-4 md:mb-0">
                     <div class="w-14 h-14 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
-                    <img src="https://i.ibb.co.com/yc1ntSw5/485737605-640557798587146-3561083034474490353-n.jpg" alt="485737605-640557798587146-3561083034474490353-n" border="0"></a>
+                    <img src="https://i.ibb.co.com/yc1ntSw5/485737605-640557798587146-3561083034474490353-n.jpg" alt="RUET Logo" border="0">
                     </div>
                     <div>
                         <h1 class="text-xl font-bold text-dark-high">Rajshahi University of Engineering & Technology</h1>
@@ -507,7 +646,7 @@
                     <div class="developer-glow-light rounded-2xl p-6 glass-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center mb-4">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
-                               <img src="https://i.ibb.co.com/PG2mNxpj/image.png" alt="image" border="0">
+                               <img src="https://i.ibb.co.com/PG2mNxpj/image.png" alt="Fahad Sarker Tuhin" class="w-full h-full rounded-full object-cover">
                             </div>
                             <div>
                                 <h3 class="exec-card-title-light">Fahad Sarker Tuhin</h3>
@@ -522,7 +661,7 @@
                     <div class="developer-glow-light rounded-2xl p-6 glass-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center mb-4">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
-                               <img src="https://i.ibb.co.com/hF05nzz6/Whats-App-Image-2025-11-05-at-20-36-59-b7c09f54.jpg" alt="Whats-App-Image-2025-11-05-at-20-36-59-b7c09f54" border="0">
+                               <img src="https://i.ibb.co.com/hF05nzz6/Whats-App-Image-2025-11-05-at-20-36-59-b7c09f54.jpg" alt="Tanmoy Karmokar Tani" class="w-full h-full rounded-full object-cover">
                             </div>
                             <div>
                                 <h3 class="exec-card-title-light">Tanmoy Karmokar Tani</h3>
@@ -537,7 +676,7 @@
                     <div class="developer-glow-light rounded-2xl p-6 glass-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center mb-4">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-500/30 flex items-center justify-center mr-4 shadow-lg backdrop-blur-sm border border-white/40">
-                               <img src="https://i.postimg.cc/wTwKPXcH/2400065.jpg" alt="2400065" border="0">
+                               <img src="https://i.postimg.cc/wTwKPXcH/2400065.jpg" alt="Ferdous Ahmed Pranto" class="w-full h-full rounded-full object-cover">
                             </div>
                             <div>
                                 <h3 class="exec-card-title-light">Ferdous Ahmed Pranto</h3>
@@ -546,10 +685,49 @@
                         </div>
                         <p class="exec-card-text-light mb-4">Chill Guy.</p>
                         <div class="flex space-x-3">
-                            <span class="tag-light">Frontend</span>
+                            
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- ===== NEW: Section Memories Slideshow ===== -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-dark-high mb-6 text-center">📸 Section Memories</h2>
+                <p class="text-dark-medium text-center mb-8 max-w-2xl mx-auto">Capturing the moments that make our engineering journey unforgettable</p>
+                
+                <!-- Slideshow container -->
+                <div class="memory-slideshow glass-card p-4" data-aos="zoom-in">
+                    <div class="relative">
+                        <!-- slides -->
+                        <img src="https://i.postimg.cc/d14x7J1T/20250625-104729-01.jpg" class="memory-slide active" alt="Field trip 1" data-caption="First tour">
+                        <img src="https://i.postimg.cc/mgsJ6X01/PXL-20250625-060525557-jpg.jpg" class="memory-slide" alt="Freshers party" data-caption="****">
+                        <img src="https://i.postimg.cc/ydkbSwS5/PXL-20250907-073952370-jpg.jpg" class="memory-slide" alt="Lab work" data-caption="****">
+                        <img src="https://i.postimg.cc/yYFr9hkJ/20250625-105915-jpg.jpg" class="memory-slide" alt="Cricket match" data-caption="****">
+                        <img src="https://i.postimg.cc/yYYR8zgT/PXL-20250903-052755181.jpg" class="memory-slide" alt="Cricket match" data-caption="****">                       
+                        <!-- overlay caption -->
+                        <div class="slideshow-overlay">
+                            <div class="slideshow-caption" id="slideCaption">First tour</div>
+                        </div>
+                        
+                        <!-- navigation -->
+                        <div class="slideshow-nav">
+                            <div class="nav-btn" id="prevSlide"><i class="fas fa-chevron-left"></i></div>
+                            <div class="nav-btn" id="nextSlide"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        
+                        <!-- dots -->
+                        <div class="slideshow-dots" id="slideshowDots">
+                            <span class="dot active" data-index="0"></span>
+                            <span class="dot" data-index="1"></span>
+                            <span class="dot" data-index="2"></span>
+                            <span class="dot" data-index="3"></span>
+                            <span class="dot" data-index="4"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Optional extra text under slideshow -->
+                <p class="text-sm text-dark-low text-center mt-4 italic">⏵ Relive the moments — hover to pause, click arrows to browse</p>
             </div>
             
             <!-- Search and Filter -->
@@ -720,7 +898,7 @@
                 fb: "https://www.facebook.com/share/16MELLd78c/",
                 wa: "https://wa.me/8801730906768",
                 insta: "https://www.instagram.com/_habiba_a_/",
-                img: "",
+                img: "https://i.postimg.cc/Gtfx2Hm3/2400068.jpg",
                 isCR: false
             },
             {
@@ -847,7 +1025,7 @@
                 roll: "2400079",
                 name: "Nasif Bin Habib",
                 loc: "Dhaka",
-                school: "xxxx",
+                school: "Monipur High School and college",
                 college: "Dhaka College,Dhaka",
                 fb: "https://www.facebook.com/share/1ApLNb7My7/",
                 wa: "https://wa.me/8801603561910",
@@ -860,7 +1038,7 @@
                 name: "Md.Arman Mahir",
                 loc: "Noakhali",
                 school: "Harinarayanpur union high school",
-                college: "xxxx",
+                college: "Noakhali Government College, Noakhali ",
                 fb: "https://www.facebook.com/share/1ETmssScNc/",
                 wa: "https://wa.me/8801615699200",
                 insta: "https://www.instagram.com/md_arman_mahir?igsh=cXNxaGtnazZsdjVu",
@@ -871,7 +1049,7 @@
                 roll: "2400081",
                 name: "Md.Hasin Anzum",
                 loc: "Rajshahi",
-                school: "xxxx",
+                school: "Rajshahi Collegiate School, Rajshahi",
                 college: "Notre Dame College,Dhaka",
                 fb: "https://www.facebook.com/share/1AhgR3NrQT/",
                 wa: "https://wa.me/8801770803020",
@@ -895,8 +1073,8 @@
                 roll: "2400083",
                 name: "Nafis Kabir Ayon",
                 loc: "Jamalpur",
-                school: "xxxx",
-                college: "xxxx",
+                school: "Jamalpur Zilla School",
+                college: "Dhaka Residential Model College",
                 fb: "https://www.facebook.com/nafiskabir.ayon",
                 wa: "https://wa.me/8801602336496",
                 insta: "https://www.instagram.com/nafis_is20?igsh=MTh2Y2dlazhsYzF1cw==",
@@ -967,8 +1145,8 @@
                 roll: "2400089",
                 name: "Abdullah Al Jubayear",
                 loc: "Noakhali",
-                school: "xxxx",
-                college: "xxxx",
+                school: "Bashurhat A.H.C Govt High School",
+                college: "Government Science Collage ",
                 fb: "https://www.facebook.com/AA.JUBAYEAR?mibextid=ZbWKwL",
                 wa: "https://wa.me/8801602808698",
                 insta: "https://www.instagram.com/aa_jubaaa_?igsh=NWk4Nmw1ODBraGc1",
@@ -1032,19 +1210,19 @@
                 fb: "https://www.facebook.com/md.sabbir.ahammed.969598",
                 wa: "https://wa.me/8801869944211",
                 insta: "https://instagram.com",
-                img: "xxxx",
+                img: "https://i.ibb.co.com/zWNJjpwt/2400094.jpg",
                 isCR: false
             },
             {
                 roll: "2400095",
                 name: "Md.Mubtashim Fuad",
                 loc: "Thakurgaon",
-                school: "xxxx",
+                school: "Nekmorod Alimuddim Govt. High School ",
                 college: "Notre Dame College,Dhaka",
                 fb: "https://www.facebook.com/share/1Yqo8df1QJ/",
                 wa: "https://wa.me/8801707477890",
                 insta: "https://www.instagram.com/md.mubtashim/",
-                img: "xxxx",
+                img: "https://i.postimg.cc/V6RtS5Dw/2400095.jpg",
                 isCR: false
             },
             {
@@ -1116,7 +1294,7 @@
                 fb: "https://facebook.com",
                 wa: "https://wa.me/8801522140954",
                 insta: "https://instagram.com",
-                img: "xxxx",
+                img: "",
                 isCR: false
             },
             {
@@ -1135,24 +1313,24 @@
                 roll: "2400103",
                 name: "Saadat Aanon Khan",
                 loc: "Dhaka",
-                school: "xxxx",
-                college: "xxxx",
+                school: "Monipur High School",
+                college: "Dhaka Commerce College",
                 fb: "https://www.facebook.com/share/19D5LMx5wV/",
                 wa: "https://wa.me/8801405206725",
                 insta: "https://www.instagram.com/saadat_aanon_khan/",
-                img: "https://i.ibb.co.com/hJvd4W3x/2400103.png",
+                img: "https://i.postimg.cc/q7Mfy5Gw/2400103.png",
                 isCR: false
             },
             {
                 roll: "2400104",
                 name: "Md.Mahid Hasan Jitu",
                 loc: "Cumilla",
-                school: "xxxx",
+                school: "Comilla Zilla School",
                 college: "Notre Dame College,Dhaka",
                 fb: "https://www.facebook.com/share/12LPeMVqB8S/",
                 wa: "https://wa.me/8801941444220",
                 insta: "https://www.instagram.com/mahid_jitu?igsh=MTg4Y2hyN3I4MWlrOA==",
-                img: "https://i.ibb.co.com/pjPGLcH1/2400104.jpg",
+                img: "https://i.ibb.co.com/KjkQsYzQ/2400104.jpg",
                 isCR: false
             },
             {
@@ -1195,8 +1373,8 @@
                 roll: "2400108",
                 name: "Shubhayon Kumar Modak",
                 loc: "Bogura",
-                school: "xxxx",
-                college: "xxxx",
+                school: "Armed Police Battalion Public School and College,Bogura",
+                college: "Govt. Azizul Haque College, Bogura",
                 fb: "https://www.facebook.com/share/1BZrr19ajA/",
                 wa: "https://wa.me/8801572906119",
                 insta: "https://instagram.com",
@@ -1315,8 +1493,8 @@
                 roll: "2400118",
                 name: "Md.Shahriar Hossain Sohan",
                 loc: "Sirajganj",
-                school: "xxxx",
-                college: "xxxx",
+                school: "Vasha Shaheed Abdul Jabbar Ansar VDP School and College, Gazipur",
+                college: "Savar Cantonment Public College,Savar,Dhaka",
                 fb: "https://www.facebook.com/share/17XkpX954z/",
                 wa: "https://wa.me/8801568520075",
                 insta: "https://www.instagram.com/shahriar24hossain?igsh=MXNvY3praTBrMWFrcQ==",
@@ -1339,19 +1517,14 @@
                 roll: "2400120",
                 name: "Amir Uddin Mahmud",
                 loc: "Chittagong",
-                school: "xxxx",
-                college: "xxxx",
+                school: "Muslim High School",
+                college: "Govt. Mohsin College,Chittagong",
                 fb: "https://www.facebook.com/alve00?mibextid=ZbWKwL",
                 wa: "https://wa.me/8801619013412",
                 insta: "https://instagram.com",
                 img: "https://i.ibb.co.com/R49bCJHZ/2400120.jpg",
                 isCR: false
             }
-
-
-
-
-
         ];
         
         
@@ -1548,11 +1721,75 @@
             });
         }
         
+        // --- Slideshow logic ---
+        function initSlideshow() {
+            const slides = document.querySelectorAll('.memory-slide');
+            const dots = document.querySelectorAll('.dot');
+            const caption = document.getElementById('slideCaption');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            if (!slides.length) return;
+            
+            let currentIdx = 0;
+            const totalSlides = slides.length;
+            
+            function showSlide(index) {
+                slides.forEach((s, i) => {
+                    s.classList.toggle('active', i === index);
+                });
+                dots.forEach((d, i) => {
+                    d.classList.toggle('active', i === index);
+                });
+                // update caption from data attribute
+                caption.textContent = slides[index].getAttribute('data-caption') || 'Memory ' + (index+1);
+                currentIdx = index;
+            }
+            
+            function nextSlide() {
+                let newIdx = (currentIdx + 1) % totalSlides;
+                showSlide(newIdx);
+            }
+            
+            function prevSlide() {
+                let newIdx = (currentIdx - 1 + totalSlides) % totalSlides;
+                showSlide(newIdx);
+            }
+            
+            // event listeners
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextSlide();
+            });
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevSlide();
+            });
+            
+            dots.forEach((dot, idx) => {
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showSlide(idx);
+                });
+            });
+            
+            // optional auto slide (pause on hover)
+            let interval = setInterval(nextSlide, 5000);
+            const slideshow = document.querySelector('.memory-slideshow');
+            slideshow.addEventListener('mouseenter', () => clearInterval(interval));
+            slideshow.addEventListener('mouseleave', () => {
+                interval = setInterval(nextSlide, 5000);
+            });
+            
+            // initial caption
+            caption.textContent = slides[0].getAttribute('data-caption') || 'First site visit • November 2024';
+        }
         
         document.addEventListener('DOMContentLoaded', function() {
             
             initParticles();
             
+            // slideshow
+            initSlideshow();
             
             document.getElementById('explore-btn').addEventListener('click', transitionToDashboard);
             
@@ -1597,6 +1834,8 @@
             
             
             document.getElementById('filter-all').classList.add('active');
+
+            // remove old static memory card click handlers (they are replaced by slideshow)
         });
     </script>
 </body>
